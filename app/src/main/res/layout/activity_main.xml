@@ -1,0 +1,71 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.saurabhs.analyzerapp.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="16sp"
+        android:text="Summary"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#212121"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="2"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/Up"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/Up"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/Down"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_below="@+id/Up"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/Down"/>
+
+        <ImageButton
+            android:id="@+id/Left"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_toLeftOf="@+id/Down"
+            android:layout_below="@+id/Up"
+            android:src="@drawable/Left"/>
+
+        <ImageButton
+            android:id="@+id/Right"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_toRightOf="@+id/Down"
+            android:layout_below="@+id/Up"
+            android:src="@drawable/Right"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Summary"/>
+
+
+
+
+
+</LinearLayout>
