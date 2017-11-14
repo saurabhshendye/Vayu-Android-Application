@@ -6,19 +6,20 @@
     android:orientation="vertical"
     tools:context="com.example.saurabhs.analyzerapp.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:text="Summary"/>
 
     <TextView
+        android:id="@+id/screen"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="#212121"
         android:layout_marginBottom="16dp"
-        android:layout_weight="2"/>
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/Disconnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnect"/>
 
 
     <RelativeLayout

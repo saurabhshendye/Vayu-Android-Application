@@ -1,3 +1,8 @@
 <resources>
+    <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">AnalyzerApp</string>
+
+    <!-- Server IP address [CHAR LIMIT=50] -->
+    <string name="server_address">1.1.1.1</string>
+
 </resources>
