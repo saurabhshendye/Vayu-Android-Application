@@ -21,7 +21,6 @@
         android:layout_weight="2"/>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,7 +29,7 @@
             android:id="@+id/Up"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/Up"
+            android:src="@drawable/up"
             android:layout_centerHorizontal="true"/>
 
         <ImageButton
@@ -39,7 +38,7 @@
             android:layout_height="64dp"
             android:layout_below="@+id/Up"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/Down"/>
+            android:src="@drawable/down"/>
 
         <ImageButton
             android:id="@+id/Left"
@@ -47,7 +46,7 @@
             android:layout_height="64dp"
             android:layout_toLeftOf="@+id/Down"
             android:layout_below="@+id/Up"
-            android:src="@drawable/Left"/>
+            android:src="@drawable/left"/>
 
         <ImageButton
             android:id="@+id/Right"
@@ -55,11 +54,12 @@
             android:layout_height="64dp"
             android:layout_toRightOf="@+id/Down"
             android:layout_below="@+id/Up"
-            android:src="@drawable/Right"/>
+            android:src="@drawable/right"/>
 
     </RelativeLayout>
 
     <Button
+        android:id="@+id/summary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Get Summary"/>
