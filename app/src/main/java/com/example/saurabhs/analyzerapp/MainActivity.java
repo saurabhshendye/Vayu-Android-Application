@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
 
     private TcpClient mTcpClient;
     private static final String LOG_TAG = "MainActivity";
+    private static final String MOVE_FORWARD = "Move Forward";
+    private static final String MOVE_BACKWARD = "Move Backward";
+    private static final String MOVE_RIGHT = "Move Right";
+    private static final String MOVE_LEFT = "Move Left";
+    private static final String GET_SUMMARY = "Get Summary";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Disconnect",
                         Toast.LENGTH_SHORT).show();
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("Disconnect");
-                }
+
             }
         });
 
@@ -50,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Get Summary",
                         Toast.LENGTH_SHORT).show();
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("Get Summary");
-                }
+                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, GET_SUMMARY);
             }
         });
 
@@ -61,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Move forward",
                         Toast.LENGTH_SHORT).show();
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("Move forward");
-                }
+                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_FORWARD);
             }
         });
 
@@ -72,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Move Backward",
                         Toast.LENGTH_SHORT).show();
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("Move Backward");
-                }
+                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_BACKWARD);
 
             }
         });
@@ -84,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Move Left",
                         Toast.LENGTH_SHORT).show();
-                if (mTcpClient != null) {
-                    mTcpClient.sendMessage("Move Left");
-                }
-
+                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_LEFT);
             }
         });
 
@@ -96,12 +90,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Move Right",
                         Toast.LENGTH_SHORT).show();
-//                if (mTcpClient != null) {
-//                    mTcpClient.sendMessage("Move Right");
-//
-//                }
-                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                Log.v(LOG_TAG,"Sent Message");
+                new SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_RIGHT);
             }
         });
 
@@ -111,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... strings) {
-            Log.v(LOG_TAG,"In the do In BackGround");
+//            Log.v(LOG_TAG,"In the do In BackGround");
             if (mTcpClient != null) {
-                mTcpClient.sendMessage("Move Forward");
-                Log.v(LOG_TAG,"Sent Message");
+                mTcpClient.sendMessage(strings[0]);
+                Log.v(LOG_TAG, "Command: "+ strings[0]);
             }
             return null;
         }
@@ -132,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
                     publishProgress(message);
                 }
             });
-            mTcpClient.sendMessage("Get Summary");
 
             mTcpClient.run();
 
@@ -143,10 +131,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             //response received from server
-            Log.d("test", "response " + values[0]);
+            Log.e("test", "response " + values[0]);
             //process server response here....
         }
     }
-
-
 }
