@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -16,8 +18,12 @@ import java.net.Socket;
 
 public class TcpClient {
 
-    public static final String SERVER_IP = "10.0.0.171"; //server IP address
-    public static final int SERVER_PORT = 1234;
+    // Log tag used for Logging
+    private static final String LOG_TAG = TcpClient.class.getSimpleName();
+
+//    private static final String SERVER_IP = "10.0.0.171"; //server IP address
+    private static final String SERVER_IP = "10.1.224.95"; //server IP address
+    private static final int SERVER_PORT = 1234;
     // message to send to the server
     private String mServerMessage;
     // sends message received notifications
@@ -25,7 +31,8 @@ public class TcpClient {
     // while this is true, the server will continue running
     private boolean mRun = false;
     // used to send messages
-    private PrintWriter mBufferOut;
+//    private PrintWriter mBufferOut;
+    private DataOutputStream dout;
     // used to read messages from the server
     private BufferedReader mBufferIn;
 
@@ -42,9 +49,19 @@ public class TcpClient {
      * @param message text entered by client
      */
     public void sendMessage(String message) {
-        if (mBufferOut != null && !mBufferOut.checkError()) {
-            mBufferOut.println(message);
-            mBufferOut.flush();
+//        if (mBufferOut != null && !mBufferOut.checkError()) {
+//            mBufferOut.println(message);
+//            mBufferOut.flush();
+//        }
+        byte[] messageBytes = message.getBytes();
+        Log.i(LOG_TAG, "Message Length: " + String.valueOf(messageBytes.length));
+        if (dout != null){
+            try {
+                dout.write(messageBytes, 0, messageBytes.length);
+                dout.flush();
+            } catch (IOException e) {
+                Log.e(LOG_TAG, e.getLocalizedMessage());
+            }
         }
     }
 
@@ -54,15 +71,16 @@ public class TcpClient {
     public void stopClient() {
 
         mRun = false;
-
-        if (mBufferOut != null) {
-            mBufferOut.flush();
-            mBufferOut.close();
-        }
+//
+//        if (mBufferOut != null) {
+//            mBufferOut.flush();
+//            mBufferOut.close();
+//        }
 
         mMessageListener = null;
         mBufferIn = null;
-        mBufferOut = null;
+//        mBufferOut = null;
+        dout = null;
         mServerMessage = null;
     }
 
@@ -74,7 +92,7 @@ public class TcpClient {
             //here you must put your computer's IP address.
             InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
-            Log.e("TCP Client", "C: Connecting...");
+            Log.e(LOG_TAG, "Connecting...");
 
             //create a socket to make the connection with the server
             Socket socket = new Socket(serverAddr, SERVER_PORT);
@@ -82,7 +100,8 @@ public class TcpClient {
             try {
 
                 //sends the message to the server
-                mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+//                mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+                dout = new DataOutputStream(socket.getOutputStream());
 
                 //receives the message which the server sends back
                 mBufferIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -100,11 +119,11 @@ public class TcpClient {
 
                 }
 
-                Log.e("RESPONSE FROM SERVER", "S: Received Message: '" + mServerMessage + "'");
+                Log.e(LOG_TAG, "S: Received Message from server: '" + mServerMessage + "'");
 
             } catch (Exception e) {
 
-                Log.e("TCP", "S: Error", e);
+                Log.e(LOG_TAG, "S: Error", e);
 
             } finally {
                 //the socket must be closed. It is not possible to reconnect to this socket
@@ -114,7 +133,7 @@ public class TcpClient {
 
         } catch (Exception e) {
 
-            Log.e("TCP", "C: Error", e);
+            Log.e(LOG_TAG, "C: Error", e);
 
         }
 
