@@ -5,4 +5,10 @@
     <!-- Server IP address [CHAR LIMIT=50] -->
     <string name="server_address">1.1.1.1</string>
 
+    <!-- Navigation [CHAR LIMIT=50] -->
+    <string name="Navigate">Control Bot</string>
+
+    <!-- Navigation [CHAR LIMIT=50] -->
+    <string name="Stats">Statistics</string>
+
 </resources>

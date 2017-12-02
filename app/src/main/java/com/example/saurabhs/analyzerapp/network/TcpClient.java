@@ -21,8 +21,8 @@ public class TcpClient {
     // Log tag used for Logging
     private static final String LOG_TAG = TcpClient.class.getSimpleName();
 
-//    private static final String SERVER_IP = "10.0.0.171"; //server IP address
-    private static final String SERVER_IP = "10.1.224.95"; //server IP address
+    private static final String SERVER_IP = "10.0.0.171"; //server IP address
+//    private static final String SERVER_IP = "10.1.224.95"; //server IP address
     private static final int SERVER_PORT = 1234;
     // message to send to the server
     private String mServerMessage;

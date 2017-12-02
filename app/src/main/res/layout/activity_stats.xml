@@ -15,31 +15,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan_background"
     android:orientation="vertical"
-    tools:context="com.example.saurabhs.analyzerapp.MainActivity">
+    tools:context="com.example.saurabhs.analyzerapp.StatsActivity">
 
-    <!-- Navigation Activity -->
-    <FrameLayout
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/category_numbers">
-        <TextView
-            android:id="@+id/Navigation_Activity"
-            style="@style/CategoryStyle"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/Navigate" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/graph">
 
-    <!-- Statistics Activity -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/category_family">
-        <TextView
-            android:id="@+id/Statistics"
-            style="@style/CategoryStyle"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/Stats" />
-    </FrameLayout>
+    </com.github.mikephil.charting.charts.LineChart>
 </LinearLayout>
