@@ -11,4 +11,15 @@
     <!-- Navigation [CHAR LIMIT=50] -->
     <string name="Stats">Statistics</string>
 
+    <string-array name="Plot_Options">
+        <item>Air Quality Index</item>
+        <item>Particulate Matter</item>
+        <item>Temperature</item>
+        <item>Humidity</item>
+        <item>Carbon Monoxide</item>
+        <item>Methane, Butane</item>
+    </string-array>
+
+    <string name="Plot_Select">Choose a Plot</string>
+
 </resources>

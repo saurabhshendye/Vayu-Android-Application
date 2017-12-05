@@ -144,6 +144,7 @@ public class NavigationActivity extends AppCompatActivity {
                 public void messageReceived(String message) {
                     //this method calls the onProgressUpdate
                     publishProgress(message);
+                    Log.v(LOG_TAG, message);
                 }
             });
             mTcpClient.run();
@@ -155,19 +156,21 @@ public class NavigationActivity extends AppCompatActivity {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             //response received from server
-            Log.e(LOG_TAG, "Response "+ values[0]);
-
-            TextView screen = (TextView) findViewById(R.id.screen);
-
-
+            Log.e(LOG_TAG, "Response :"+ values[0]);
+            Toast.makeText(getApplicationContext(), values[0],
+                    Toast.LENGTH_SHORT).show();
+//            TextView screen = (TextView) findViewById(R.id.screen);
 
             //process server response here....
             String[] parts = values[0].split(":");
+
             try {
                 JSONObject root = new JSONObject(values[0]);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+        }
 
 
 
@@ -189,5 +192,5 @@ public class NavigationActivity extends AppCompatActivity {
 //                Log.e(LOG_TAG, "Unable to insert record into a database");
 //            }
         }
-    }
 }
+

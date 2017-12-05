@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +22,7 @@ public class TcpClient {
     // Log tag used for Logging
     private static final String LOG_TAG = TcpClient.class.getSimpleName();
 
-    private static final String SERVER_IP = "10.0.0.171"; //server IP address
+    private static final String SERVER_IP = "10.0.0.178"; //server IP address
 //    private static final String SERVER_IP = "10.1.224.95"; //server IP address
     private static final int SERVER_PORT = 1234;
     // message to send to the server
@@ -34,7 +35,9 @@ public class TcpClient {
 //    private PrintWriter mBufferOut;
     private DataOutputStream dout;
     // used to read messages from the server
-    private BufferedReader mBufferIn;
+//    private BufferedReader mBufferIn;
+    private DataInputStream din;
+
 
     /**
      * Constructor of the class. OnMessagedReceived listens for the messages received from server
@@ -78,7 +81,8 @@ public class TcpClient {
 //        }
 
         mMessageListener = null;
-        mBufferIn = null;
+//        mBufferIn = null;
+        din = null;
 //        mBufferOut = null;
         dout = null;
         mServerMessage = null;
@@ -104,13 +108,25 @@ public class TcpClient {
                 dout = new DataOutputStream(socket.getOutputStream());
 
                 //receives the message which the server sends back
-                mBufferIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                mBufferIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                din = new DataInputStream(socket.getInputStream());
 
 
                 //in this while the client listens for the messages sent by the server
                 while (mRun) {
 
-                    mServerMessage = mBufferIn.readLine();
+                    byte [] bytes = new byte[4];
+//                    mServerMessage = mBufferIn.readLine();
+                    din.readFully(bytes);
+//                    mServerMessage = din.readUTF();
+                    mServerMessage = bytes.toString();
+                    char ch;
+                    for (byte b : bytes){
+                        ch = (char) b;
+                        Log.e(LOG_TAG, Character.toString(ch));
+                    }
+
+                    Log.e(LOG_TAG, "Decoded Response: " + mServerMessage);
 
                     if (mServerMessage != null && mMessageListener != null) {
                         //call the method messageReceived from MyActivity class

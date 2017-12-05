@@ -3,6 +3,7 @@ package com.example.saurabhs.analyzerapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -28,6 +29,8 @@ public class StatsActivity extends AppCompatActivity implements OnChartGestureLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
+        Spinner plotSpinner = (Spinner) findViewById(R.id.Graph_Selector);
+
         lineChart = (LineChart) findViewById(R.id.graph);
 
 //        lineChart.setOnChartGestureListener(StatsActivity.this);
@@ -35,6 +38,8 @@ public class StatsActivity extends AppCompatActivity implements OnChartGestureLi
 
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(false);
+//        lineChart.setHighlightPerTapEnabled(true);
+        lineChart.setPinchZoom(true);
 
         ArrayList<Entry> List = new ArrayList<>();
         List.add(new Entry(0, 10));
@@ -44,6 +49,13 @@ public class StatsActivity extends AppCompatActivity implements OnChartGestureLi
         List.add(new Entry(4, 7));
         List.add(new Entry(5, 65));
         List.add(new Entry(6, 80));
+        List.add(new Entry(7, 10));
+        List.add(new Entry(8, 20));
+        List.add(new Entry(9, 30));
+        List.add(new Entry(10, 5));
+        List.add(new Entry(11, 7));
+        List.add(new Entry(12, 65));
+        List.add(new Entry(13, 80));
 
         LineDataSet lineDataSet = new LineDataSet(List, "Set 1");
         lineDataSet.setFillAlpha(100);
