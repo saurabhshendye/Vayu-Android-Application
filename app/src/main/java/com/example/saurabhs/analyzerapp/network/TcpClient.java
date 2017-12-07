@@ -115,24 +115,21 @@ public class TcpClient {
                 //in this while the client listens for the messages sent by the server
                 while (mRun) {
 
-                    byte [] bytes = new byte[4];
+                    byte [] bytes = new byte[118];
 //                    mServerMessage = mBufferIn.readLine();
                     din.readFully(bytes);
-//                    mServerMessage = din.readUTF();
-                    mServerMessage = bytes.toString();
+                    StringBuilder stringBuilder = new StringBuilder();
                     char ch;
                     for (byte b : bytes){
                         ch = (char) b;
-                        Log.e(LOG_TAG, Character.toString(ch));
+                        stringBuilder.append(ch);
                     }
-
-                    Log.e(LOG_TAG, "Decoded Response: " + mServerMessage);
+                    mServerMessage = stringBuilder.toString();
 
                     if (mServerMessage != null && mMessageListener != null) {
                         //call the method messageReceived from MyActivity class
                         mMessageListener.messageReceived(mServerMessage);
                     }
-
                 }
 
                 Log.e(LOG_TAG, "S: Received Message from server: '" + mServerMessage + "'");
@@ -148,9 +145,7 @@ public class TcpClient {
             }
 
         } catch (Exception e) {
-
             Log.e(LOG_TAG, "C: Error", e);
-
         }
 
     }

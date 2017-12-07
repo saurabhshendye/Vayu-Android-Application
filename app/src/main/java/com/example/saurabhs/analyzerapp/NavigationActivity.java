@@ -1,5 +1,7 @@
 package com.example.saurabhs.analyzerapp;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.saurabhs.analyzerapp.data.AirContract;
 import com.example.saurabhs.analyzerapp.network.TcpClient;
 
 import org.json.JSONException;
@@ -57,6 +60,9 @@ public class NavigationActivity extends AppCompatActivity {
         ImageButton RightButton = (ImageButton) findViewById(R.id.Right);
         Button summaryButton = (Button) findViewById(R.id.summary_button);
         Button disConnectButton = (Button) findViewById(R.id.Disconnect);
+
+        TextView screen = (TextView) findViewById(R.id.screen);
+        screen.setText("Testing...");
 
         // Starting a thread for Network Connection
         new NavigationActivity.ConnectionTask().execute("");
@@ -157,40 +163,41 @@ public class NavigationActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
             //response received from server
             Log.e(LOG_TAG, "Response :"+ values[0]);
-            Toast.makeText(getApplicationContext(), values[0],
-                    Toast.LENGTH_SHORT).show();
-//            TextView screen = (TextView) findViewById(R.id.screen);
+
+            TextView screen = (TextView) findViewById(R.id.screen);
 
             //process server response here....
-            String[] parts = values[0].split(":");
-
             try {
                 JSONObject root = new JSONObject(values[0]);
+                String PM25 = root.getString("PM2.5");
+                String PM10 = root.getString("PM10");
+                String LPG = root.getString("LPG");
+                String CO = root.getString("CO");
+                String SMOKE = root.getString("SMOKE");
+                screen.setText("PM2.5: " + PM25 +"\n" + "PM10: " + PM10
+                        + "\n" + "LPG: " + LPG + "\n" + "CO: " + CO + "\n" + "SMOKE: " + SMOKE );
+//                Log.i(LOG_TAG, "PM2.5: " + PM25 +"\n" + "PM10: " + PM10);
+//                Log.i(LOG_TAG, "Float Value: " + Float.parseFloat(PM25));
+//                Log.i(LOG_TAG, "Float Value: " + String.valueOf(Float.parseFloat(PM25)));
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(AirContract.AirEntry.COLUMN_PARTICULATES10, PM10);
+                contentValues.put(AirContract.AirEntry.COLUMN_PARTICULATES25, PM25);
+                contentValues.put(AirContract.AirEntry.COLUMN_CO, CO);
+                contentValues.put(AirContract.AirEntry.COLUMN_SMOKE, SMOKE);
+                contentValues.put(AirContract.AirEntry.COLUMN_LPG, LPG);
+
+                Uri rowUri = getContentResolver().insert(AirContract.AirEntry.CONTENT_URI,contentValues);
+
+                if (rowUri!=null){
+                    Log.i(LOG_TAG, "Record Successfully inserted");
+                } else {
+                    Log.e(LOG_TAG, "Unable to insert record into a database");
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
-
-
-
-//            screen.setText(parts[0] + "\n" + parts[1] + "\n" +
-//                            parts[2] + "\n" + parts[3] + "\n" + parts[4]);
-//
-//            ContentValues contentValues = new ContentValues();
-//            contentValues.put(AirContract.AirEntry.COLUMN_TEMPERATURE, parts[0]);
-//            contentValues.put(AirContract.AirEntry.COLUMN_HUMIDITY, parts[1]);
-//            contentValues.put(AirContract.AirEntry.COLUMN_PARTICULATES, parts[2]);
-//            contentValues.put(AirContract.AirEntry.COLUMN_CO, parts[3]);
-//            contentValues.put(AirContract.AirEntry.COLUMN_MB, parts[4]);
-
-//            Uri rowUri = getContentResolver().insert(AirContract.AirEntry.CONTENT_URI,contentValues);
-
-//            if (rowUri!=null){
-//                Log.v(LOG_TAG, "Record Successfully inserted");
-//            } else {
-//                Log.e(LOG_TAG, "Unable to insert record into a database");
-//            }
-        }
+     }
 }
 

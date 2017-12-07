@@ -35,12 +35,10 @@ public final class AirContract {
          */
         public static final String TABLE_NAME = "Air_Quality";
         public static final String COLUMN_ID = BaseColumns._ID;
-        public static final String COLUMN_TEMPERATURE = "Temperature";
-        public static final String COLUMN_HUMIDITY = "Humidity";
-        public static final String COLUMN_PARTICULATES = "Particles";
+        public static final String COLUMN_PARTICULATES25 = "Particles25";
+        public static final String COLUMN_PARTICULATES10 = "Particles10";
         public static final String COLUMN_CO = "CO";
-        public static final String COLUMN_MB = "MB";                // Methane and Butane
-
-
+        public static final String COLUMN_LPG = "LPG";                // Methane and Butane
+        public static final String COLUMN_SMOKE = "Smoke";
     }
 }

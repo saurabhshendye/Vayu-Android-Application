@@ -15,11 +15,11 @@ public class AirDBHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_QUERY = "CREATE TABLE " + AirContract.AirEntry.TABLE_NAME +
             "( " + AirContract.AirEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            AirContract.AirEntry.COLUMN_TEMPERATURE + " TEXT," +
-            AirContract.AirEntry.COLUMN_HUMIDITY + " TEXT, " +
             AirContract.AirEntry.COLUMN_CO + " TEXT, " +
-            AirContract.AirEntry.COLUMN_PARTICULATES + " TEXT, " +
-            AirContract.AirEntry.COLUMN_MB + " TEXT);";
+            AirContract.AirEntry.COLUMN_PARTICULATES10 + " TEXT, " +
+            AirContract.AirEntry.COLUMN_LPG + " TEXT, " +
+            AirContract.AirEntry.COLUMN_SMOKE + " TEXT, " +
+            AirContract.AirEntry.COLUMN_PARTICULATES25 + " TEXT);";
 
     public AirDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

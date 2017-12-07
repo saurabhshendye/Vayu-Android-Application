@@ -18,7 +18,6 @@ import android.util.Log;
 public class AirQualityProvider extends ContentProvider {
 
     private AirDBHelper airDBHelper;
-
     public static final String LOG_TAG = AirQualityProvider.class.getSimpleName();
 
     /** URI matcher code for the content URI for the pets table */
@@ -57,8 +56,30 @@ public class AirQualityProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
-        return null;
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs,
+                        @Nullable String sortOrder) {
+        SQLiteDatabase db = airDBHelper.getReadableDatabase();
+        Cursor cursor;
+
+        int match = sUriMatcher.match(uri);
+        switch (match){
+            case AIR_RECORDS:
+                cursor = db.query(AirContract.AirEntry.TABLE_NAME, projection, selection, selectionArgs, null, null,
+                        sortOrder);
+                break;
+            case AIR_RECORD_ID:
+                selection = AirContract.AirEntry.COLUMN_ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                cursor = db.query(AirContract.AirEntry.TABLE_NAME,projection,selection,selectionArgs,null,
+                        null,sortOrder);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+        }
+
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        return cursor;
     }
 
     @Nullable

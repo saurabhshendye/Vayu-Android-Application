@@ -11,6 +11,8 @@
     <TextView
         android:id="@+id/screen"
         android:layout_width="match_parent"
+        android:textColor="@color/tan_background"
+        tools:text="Display Information here"
         android:layout_height="200dp"
         android:background="#212121"
         android:layout_marginBottom="16dp"
