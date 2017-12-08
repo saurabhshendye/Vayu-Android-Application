@@ -42,4 +42,15 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/Stats" />
     </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/category_phrases">
+        <TextView
+            android:id="@+id/Backup"
+            style="@style/CategoryStyle"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/Backup" />
+    </FrameLayout>
 </LinearLayout>

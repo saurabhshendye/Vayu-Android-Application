@@ -199,5 +199,11 @@ public class NavigationActivity extends AppCompatActivity {
             }
         }
      }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTcpClient.stopClient();
+    }
 }
 

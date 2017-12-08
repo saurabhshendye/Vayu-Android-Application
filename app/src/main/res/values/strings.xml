@@ -8,8 +8,11 @@
     <!-- Navigation [CHAR LIMIT=50] -->
     <string name="Navigate">Control Bot</string>
 
-    <!-- Navigation [CHAR LIMIT=50] -->
+    <!-- Statistics [CHAR LIMIT=50] -->
     <string name="Stats">Statistics</string>
+
+    <!-- Statistics [CHAR LIMIT=50] -->
+    <string name="Backup">Backup</string>
 
     <string name="air_quality">Air Quality Index</string>
     <string name="PM25">PM25</string>

@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView numbers = (TextView) findViewById(R.id.Navigation_Activity);
-        numbers.setOnClickListener(new View.OnClickListener() {
+        TextView nav = (TextView) findViewById(R.id.Navigation_Activity);
+        nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent numIntent = new Intent(MainActivity.this, NavigationActivity.class);
@@ -36,11 +36,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TextView colors = (TextView) findViewById(R.id.Statistics);
-        colors.setOnClickListener(new View.OnClickListener() {
+        TextView stats = (TextView) findViewById(R.id.Statistics);
+        stats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent colIntent = new Intent(MainActivity.this, StatsActivity.class);
+                startActivity(colIntent);
+            }
+        });
+
+        TextView backup = (TextView) findViewById(R.id.Backup);
+        backup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent colIntent = new Intent(MainActivity.this, BackupActivity.class);
                 startActivity(colIntent);
             }
         });
