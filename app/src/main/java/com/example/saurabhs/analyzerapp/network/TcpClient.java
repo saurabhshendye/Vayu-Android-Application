@@ -115,7 +115,7 @@ public class TcpClient {
                 //in this while the client listens for the messages sent by the server
                 while (mRun) {
 
-                    byte [] bytes = new byte[118];
+                    byte [] bytes = new byte[119];
 //                    mServerMessage = mBufferIn.readLine();
                     din.readFully(bytes);
                     StringBuilder stringBuilder = new StringBuilder();

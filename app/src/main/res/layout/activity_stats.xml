@@ -20,16 +20,18 @@
 
     <Spinner
         android:id="@+id/Graph_Selector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:spinnerMode="dropdown"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:layout_marginBottom="30dp"
+        android:layout_height="48dp"
         android:entries="@array/Plot_Options"
         android:prompt="@string/Plot_Select"/>
 
     <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/graph"
-        android:layout_weight="3">
+        android:layout_height="400dp"
+        android:id="@+id/graph">
     </com.github.mikephil.charting.charts.LineChart>
 </LinearLayout>
