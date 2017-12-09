@@ -31,10 +31,9 @@
             android:name=".StatsActivity"
             android:label="Statistics"
             android:parentActivityName=".MainActivity" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
 
         <activity
             android:name=".NavigationActivity"
@@ -44,7 +43,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".BackupActivity"></activity>
+        <activity
+            android:name=".BackupActivity"
+            android:label="Backing Up"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
-
 </manifest>
