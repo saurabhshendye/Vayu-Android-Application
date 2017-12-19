@@ -11,16 +11,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.saurabhs.analyzerapp.data.AirContract;
+import com.example.saurabhs.analyzerapp.network.RestClientAWS;
 import com.example.saurabhs.analyzerapp.network.TCPClientAWS;
 import com.example.saurabhs.analyzerapp.network.TcpClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.saurabhs.analyzerapp.network.RestClientAWS.makeHttpPostRequest;
+
 public class BackupActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = BackupActivity.class.getSimpleName();
-    private TCPClientAWS AWSClient;
+//    private TCPClientAWS AWSClient;
+//    private RestClientAWS AWSClient;
     private ProgressBar progressBar;
     private TextView backupText;
 
@@ -35,7 +39,7 @@ public class BackupActivity extends AppCompatActivity {
         backupText = (TextView) findViewById(R.id.backup_complete);
         backupText.setVisibility(View.GONE);
 
-        new BackupActivity.BackupTask().execute("");
+//        new BackupActivity.BackupTask().execute("");
 
         String [] projection = {AirContract.AirEntry.COLUMN_ID,
                 AirContract.AirEntry.COLUMN_PARTICULATES10,
@@ -98,12 +102,15 @@ public class BackupActivity extends AppCompatActivity {
                 // Nothing needs to be done
             }
 
-            if (AWSClient != null) {
-                AWSClient.sendMessage(strings[0]);
-                Log.i(LOG_TAG, strings[0]);
-            } else {
-                Log.e(LOG_TAG, "AWS client is null.");
-            }
+            makeHttpPostRequest(strings[0]);
+
+
+//            if (AWSClient != null) {
+//                AWSClient.sendMessage(strings[0]);
+//                Log.i(LOG_TAG, strings[0]);
+//            } else {
+//                Log.e(LOG_TAG, "AWS client is null.");
+//            }
 
             return null;
         }
@@ -111,8 +118,6 @@ public class BackupActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
-
         }
 
         @Override
@@ -121,25 +126,25 @@ public class BackupActivity extends AppCompatActivity {
         }
     }
 
-    public class BackupTask extends AsyncTask<String, String, TCPClientAWS> {
-
-        @Override
-        protected TCPClientAWS doInBackground(String... strings) {
-            AWSClient = new TCPClientAWS(new TCPClientAWS.OnMessageReceived() {
-                @Override
-                public void messageReceived(String message) {
-                    publishProgress(message);
-                }
-            });
-            AWSClient.run();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
-    }
+//    public class BackupTask extends AsyncTask<String, String, TCPClientAWS> {
+//
+//        @Override
+//        protected TCPClientAWS doInBackground(String... strings) {
+//            AWSClient = new TCPClientAWS(new TCPClientAWS.OnMessageReceived() {
+//                @Override
+//                public void messageReceived(String message) {
+//                    publishProgress(message);
+//                }
+//            });
+//            AWSClient.run();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(String... values) {
+//            super.onProgressUpdate(values);
+//        }
+//    }
 
     @Override
     protected void onStop() {
