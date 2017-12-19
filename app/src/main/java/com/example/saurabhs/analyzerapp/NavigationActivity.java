@@ -58,7 +58,7 @@ public class NavigationActivity extends AppCompatActivity {
         ImageButton DownButton = (ImageButton) findViewById(R.id.Down);
         ImageButton LeftButton = (ImageButton) findViewById(R.id.Left);
         ImageButton RightButton = (ImageButton) findViewById(R.id.Right);
-        Button summaryButton = (Button) findViewById(R.id.summary_button);
+//        Button summaryButton = (Button) findViewById(R.id.summary_button);
         Button disConnectButton = (Button) findViewById(R.id.Disconnect);
 
         TextView screen = (TextView) findViewById(R.id.screen);
@@ -77,19 +77,19 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
 
-        summaryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), GET_SUMMARY,
-                        Toast.LENGTH_SHORT).show();
-                new NavigationActivity.SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, GET_SUMMARY);
-            }
-        });
+//        summaryButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getApplicationContext(), GET_SUMMARY,
+//                        Toast.LENGTH_SHORT).show();
+//                new NavigationActivity.SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, GET_SUMMARY);
+//            }
+//        });
 
         UpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), MOVE_FORWARD,
+                Toast.makeText(getApplicationContext(), "FORWARD",
                         Toast.LENGTH_SHORT).show();
                 new NavigationActivity.SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_FORWARD);
             }
@@ -119,7 +119,7 @@ public class NavigationActivity extends AppCompatActivity {
         RightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), MOVE_RIGHT,
+                Toast.makeText(getApplicationContext(), "RIGHT",
                         Toast.LENGTH_SHORT).show();
                 // Sending "Move Right" command to pi
                 new NavigationActivity.SendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, MOVE_RIGHT);

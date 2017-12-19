@@ -1,24 +1,26 @@
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.example.saurabhs.analyzerapp.BackupActivity">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Backup_View"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.saurabhs.analyzerapp.BackupActivity">
 
 <!-- Navigation Activity -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:id="@+id/backup_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:text="@string/Backup_complete"/>
 
     <ProgressBar
-        android:layout_marginTop="120dp"
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+</RelativeLayout>

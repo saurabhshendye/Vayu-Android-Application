@@ -21,6 +21,8 @@
     <string name="LPG">LPG</string>
     <string name="Smoke">Smoke</string>
 
+    <string name="Backup_complete">Backup Completed</string>
+
     <string-array name="Plot_Options">
         <item>@string/PM25</item>
         <item>@string/PM10</item>

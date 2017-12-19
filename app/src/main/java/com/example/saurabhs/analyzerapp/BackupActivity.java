@@ -5,6 +5,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.saurabhs.analyzerapp.data.AirContract;
 import com.example.saurabhs.analyzerapp.network.TCPClientAWS;
@@ -17,11 +21,19 @@ public class BackupActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = BackupActivity.class.getSimpleName();
     private TCPClientAWS AWSClient;
+    private ProgressBar progressBar;
+    private TextView backupText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
+        backupText = (TextView) findViewById(R.id.backup_complete);
+        backupText.setVisibility(View.GONE);
 
         new BackupActivity.BackupTask().execute("");
 
@@ -69,6 +81,10 @@ public class BackupActivity extends AppCompatActivity {
             new BackupActivity.sendDataTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, message);
 
         }
+
+        progressBar.setVisibility(View.GONE);
+        backupText.setVisibility(View.VISIBLE);
+
     }
 
     public class sendDataTask extends AsyncTask<String, Void, Void> {
@@ -95,6 +111,8 @@ public class BackupActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+
         }
 
         @Override
